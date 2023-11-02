@@ -52,9 +52,13 @@ const deleteCategory = (req,res) => {
         let category = []
         cat.map((d)=>{
         category=d.prodcat
-        console.log(d,category,id)
+        // console.log(d,category,id)
+        console.log(category.length)
         if(category.length===1){
+            console.log(category[0])
+
             if(category[0]===id){
+                console.log(`DELETE FROM product WHERE id=${d.id}`)
                 pool.query(`DELETE FROM product WHERE id=${d.id}`, (err,result) => {
                     if(err){
                         throw err
@@ -67,10 +71,10 @@ const deleteCategory = (req,res) => {
         else if(category.length>0){
             if(category.includes(id)){
                 let filteredProdCat='{"'
-                if(category.length===1){
-                    filteredProdCat=`{"${category[0]}"}`
-                }
-                else{
+                if (!(category[0]===id))
+                {
+                    
+                
                     filteredProdCat+=category[0]
                     for(let i=1;i<category.length;i++){
                         if(!(category[i]===id)){
@@ -79,6 +83,21 @@ const deleteCategory = (req,res) => {
                         }
                     }
                     filteredProdCat+='"}'
+                }
+                else{
+                    if(category.length===2){
+                        filteredProdCat=`{"${category[1]}"}`
+                    }
+                    else{
+                        filteredProdCat+=category[1]
+                        for(let i=2;i<category.length;i++){
+                            if(!(category[i]===id)){
+                            filteredProdCat+='","'
+                            filteredProdCat+=category[i]
+                            }
+                        }
+                        filteredProdCat+='"}'
+                    }
                 }
                 pool.query(`UPDATE product SET ProdCat='${filteredProdCat}' WHERE id=${d.id}`, (err,result) => {
                     if(err){
