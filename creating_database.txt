@@ -1,4 +1,4 @@
-open SQL shell(PG)and run these commands
+commands to create database
 
 1.
 CREATE DATABASE product
@@ -22,42 +22,3 @@ CREATE TABLE product(
   description TEXT NOT NULL,
   isactive BOOLEAN DEFAULT false
 );
-
-3.
-DELETE FROM product WHERE id=1;
-
-insert into category (name, description, isactive) values ('cat-1 ', 'this is cat-1',true);
-
-insert into product (prodName, ProdCat, cost, description, isactive) values ('prod-1 ', '{"1","2"}', 100, 'this is prod-1',true);
-
-4.
-(it will display tables)
-\d category
-\d product
-
-5.
-(JSON queries for category)
-{
-  "name":"category-5",
-  "isactive":true,
-  "description":"this is category-5"
-}
-
-{
-  "ColName":"name",
-  "ColValue":"category-4"
-}
-
-(JSON queries for product)
-{
-  "prodName":"product-1",
-  "ProdCat":1,
-  "cost":1000,
-  "isactive":true,
-  "description":"this is product-1"
-}
-
-{
-  "ColName":"prodName",
-  "ColValue":"product3"
-}
