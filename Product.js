@@ -52,7 +52,6 @@ const updateproduct = (req,res) => {
     let id = parseInt(req.params.id)
     const { name,status,cost,categories,description }  = req.body
 
-    //   edited by sac starts
     let filteredProdCat='{"'
     if(categories.length===1){
         filteredProdCat=`{"${categories[0]}"}`
@@ -65,7 +64,7 @@ const updateproduct = (req,res) => {
         }
         filteredProdCat+='"}'
     }
-    //   edited by sac ends
+
 
     pool.query(`UPDATE product  SET prodName='${name}', isactive=${status}, cost='${cost}',ProdCat='${filteredProdCat}', description='${description}' WHERE id=${id}`, (err,result) => {
         if(err){
